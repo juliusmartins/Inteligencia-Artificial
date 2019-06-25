@@ -1,0 +1,84 @@
+#include <iostream>
+main()
+{
+    int entrada[4][3];
+    double peso[3];
+    int desejada[4];
+    int saida;
+    double erro;
+    int i,j;
+    bool b;
+    double soma;
+    entrada[0][0]=0;entrada[0][1]=0;entrada[0][2]=1;
+    entrada[1][0]=0;entrada[1][1]=1;entrada[1][2]=1;
+    entrada[2][0]=1;entrada[2][1]=0;entrada[2][2]=1;
+    entrada[3][0]=1;entrada[3][1]=1;entrada[3][2]=1;
+    peso[0]=0.3;peso[1]=0.3;peso[2]=0.3;
+    desejada[0]=0;desejada[1]=1;desejada[2]=1;desejada[3]=1;
+    b=false;
+    int a;
+    while(!b)
+
+        {
+
+            b= true;
+
+            for(i= 0;i<4;i++)
+
+                {
+
+                    printf("%d linha de entrada", i);
+
+                    for(j=0;j<3;j++)
+
+                        {
+
+                            soma= entrada[i][j] * peso[j];
+
+                        }
+
+                    if(soma < 0)
+                    {
+
+                        saida= 0;
+                    }
+
+                    else
+                    {
+
+                        saida= 1;
+                    }
+
+                    erro= desejada[i] - saida;
+
+                    if (abs(erro) != 0)
+                    {
+
+
+
+                        b= b && false;
+
+                        for(j= 0;j<3;j++)
+
+                                {
+
+                                    printf("antigo peso[%d]= %d", j,peso[j]);
+
+                                    peso[j]= peso[j] + 0.05 * (erro * entrada[i][j]);
+
+                                    printf("novo peso[%d]=%d",j,peso[j]);
+                                    scanf("%d",&a);
+
+                                }
+
+                    }
+
+                    else
+                    {
+                        b=b && true;
+                    }
+
+
+            }
+}
+}
