@@ -1,0 +1,63 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+	double entrada[8][2];
+	double peso[2];
+	double desejada[8];
+	double saida;
+	double erro;
+	int i, j, a;
+	bool b;
+	double soma;
+	entrada[0][0] = 0.00; entrada[0][1] = 1;
+	entrada[1][0] = 0.10; entrada[1][1] = 1;
+	entrada[2][0] = 0.20; entrada[2][1] = 1;
+	entrada[3][0] = 0.30; entrada[3][1] = 1;
+	entrada[4][0] = 0.40; entrada[4][1] = 1;
+	entrada[5][0] = 0.70; entrada[5][1] = 1;
+	entrada[6][0] = 1.00; entrada[6][1] = 1;
+	entrada[7][0] = 1.50; entrada[7][1] = 1;
+	peso[0]=0.3;peso[1]=0.3;
+	desejada[0]=0.08;
+	desejada[1]=1.09;
+	desejada[2]=0.11;
+	desejada[3]=0.13;
+	desejada[4]=0.15;
+	desejada[5]=0.25;
+	desejada[6]=0.38;
+	desejada[7]=0.62;
+	b=false;
+	while (!b)
+	{
+		b = true;
+		for (i = 0; i < 8; i++)
+		{
+			cout << i << " linha de entrada" << endl;
+			for (j = 0; j < 2; j++)
+			{
+				soma = soma + entrada[i][j] * peso[j];
+			}
+			soma=soma*(-1);
+			saida=1/(1+pow(2.71828,soma));
+			erro=desejada[i]-saida;
+			if (erro != 0)
+			{
+				b = b && false;
+				for (j = 0; j < 2; j++)
+				{
+					//printf("antigo peso[%d]= %d", j, peso[j]);
+					cout << "peso[" << j << "] antigo = " << peso[j] << endl;
+					peso[j] = peso[j] + 0.1 * (saida*(1-saida)*erro * entrada[i][j]);
+					//printf("novo peso[%d]=%d", j, peso[j]);
+					cout << "peso[" << j << "] novo = " << peso[j] << endl;
+				}
+			}
+			else
+			{
+				b = b && true;
+			}
+		}
+	}
+}
